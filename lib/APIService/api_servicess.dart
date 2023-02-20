@@ -3,11 +3,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_function/APIService/string.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:payroll_project/APIService/string.dart';
 
-import '../const/sameFunction/same_function.dart';
+import '../sameFunction/same_function.dart';
 import 'api_response.dart';
 
 class APICalling {
@@ -41,20 +41,21 @@ class APICalling {
       // print(request.body);
       if (ALL_OK == request.statusCode) {
         return APISuccess(
-            statusCode: request.statusCode, reponse: jsonDecode(request.body));
+            statusCode: request.statusCode, response: jsonDecode(request.body));
       } else {
-        return APIFailed(statusCode: ERROR, reponse: "Failed");
+        return APIFailed(statusCode: ERROR, response: "Failed");
       }
     } on SocketException {
-      return APIFailed(statusCode: NO_INTERNET, reponse: 'No Internet');
+      return APIFailed(statusCode: NO_INTERNET, response: 'No Internet');
     } on FormatException {
-      return APIFailed(statusCode: INVALID_FORMAT, reponse: 'Format Exception');
+      return APIFailed(
+          statusCode: INVALID_FORMAT, response: 'Format Exception');
     } on HttpException {
-      return APIFailed(statusCode: ERROR, reponse: 'HTTP Exception');
+      return APIFailed(statusCode: ERROR, response: 'HTTP Exception');
     } on NoSuchMethodError catch (e) {
-      return APIFailed(statusCode: UNKNOWN_ERROR, reponse: e.toString());
+      return APIFailed(statusCode: UNKNOWN_ERROR, response: e.toString());
     } catch (e) {
-      return APIFailed(statusCode: UNKNOWN_ERROR, reponse: request.body);
+      return APIFailed(statusCode: UNKNOWN_ERROR, response: request.body);
     }
   }
 }
@@ -81,20 +82,21 @@ class APICallingForSingleFiles {
       if (response.statusCode == ALL_OK) {
         return APISuccess(
           statusCode: ALL_OK,
-          reponse: jsonDecode(resBody),
+          response: jsonDecode(resBody),
         );
       } else {
-        return APISuccess(statusCode: ERROR, reponse: 'Failed To Upload');
+        return APISuccess(statusCode: ERROR, response: 'Failed To Upload');
       }
     } on SocketException {
-      return APIFailed(statusCode: NO_INTERNET, reponse: 'No Internet');
+      return APIFailed(statusCode: NO_INTERNET, response: 'No Internet');
     } on FormatException {
-      return APIFailed(statusCode: INVALID_FORMAT, reponse: 'Format Exception');
+      return APIFailed(
+          statusCode: INVALID_FORMAT, response: 'Format Exception');
     } on HttpException {
-      return APIFailed(statusCode: ERROR, reponse: 'HTTP Exception');
+      return APIFailed(statusCode: ERROR, response: 'HTTP Exception');
     } catch (e) {
       debugPrint('error4====>>' + e.toString());
-      return APIFailed(statusCode: UNKNOWN_ERROR, reponse: ERROR_OCCURED);
+      return APIFailed(statusCode: UNKNOWN_ERROR, response: ERROR_OCCURED);
     }
   }
 }
@@ -128,19 +130,20 @@ class APICallingForFiles {
       http.StreamedResponse response = await request.send();
       final resBody = await response.stream.bytesToString();
       if (response.statusCode == ALL_OK) {
-        return APISuccess(statusCode: ALL_OK, reponse: jsonDecode(resBody));
+        return APISuccess(statusCode: ALL_OK, response: jsonDecode(resBody));
       } else {
-        return APISuccess(statusCode: ERROR, reponse: 'Failed To Upload');
+        return APISuccess(statusCode: ERROR, response: 'Failed To Upload');
       }
     } on SocketException {
-      return APIFailed(statusCode: NO_INTERNET, reponse: 'No Internet');
+      return APIFailed(statusCode: NO_INTERNET, response: 'No Internet');
     } on FormatException {
-      return APIFailed(statusCode: INVALID_FORMAT, reponse: 'Format Exception');
+      return APIFailed(
+          statusCode: INVALID_FORMAT, response: 'Format Exception');
     } on HttpException {
-      return APIFailed(statusCode: ERROR, reponse: 'HTTP Exception');
+      return APIFailed(statusCode: ERROR, response: 'HTTP Exception');
     } catch (e) {
       debugPrint('error4====>>' + e.toString());
-      return APIFailed(statusCode: UNKNOWN_ERROR, reponse: ERROR_OCCURED);
+      return APIFailed(statusCode: UNKNOWN_ERROR, response: ERROR_OCCURED);
     }
   }
 }

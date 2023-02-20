@@ -1,6 +1,5 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 showSnackbar(BuildContext context, String text, {int sec = 2}) {
   ScaffoldMessenger.of(context).removeCurrentSnackBar();

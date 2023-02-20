@@ -1,17 +1,17 @@
 class APISuccess {
   int statusCode;
-  Object reponse;
+  Object response;
   APISuccess({
     required this.statusCode,
-    required this.reponse,
+    required this.response,
   });
 }
 
 class APIFailed {
   int statusCode;
-  Object reponse;
+  Object response;
   APIFailed({
     required this.statusCode,
-    required this.reponse,
+    required this.response,
   });
 }
